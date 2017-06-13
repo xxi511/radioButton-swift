@@ -6,7 +6,7 @@ Very basic radio button
 1. drag `radioButton.swift` to project    
 2. drag a `UIButton` to Storyboard
 3. click `identity inspector` page, setting Custom class as `radioButton`    
-set button style frome `system` to `custom`
+set button style frome `system` to `custom`    
 ![](https://github.com/xxi511/radioButton-swift/blob/master/images/img4.png)    
 
 4. Connect by **IBCollection**    
