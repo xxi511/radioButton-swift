@@ -21,46 +21,99 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YmO-aT-PQq" customClass="radioButton" customModule="radioButton" customModuleProvider="target">
-                                <rect key="frame" x="30" y="50" width="93.5" height="34"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="0.25490196079999999" green="0.52549019610000003" blue="0.85490196080000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VUB-Cx-iCC"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFa-cK-X7c" customClass="radioButton" customModule="radioButton" customModuleProvider="target">
-                                <rect key="frame" x="152" y="50" width="92" height="34"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="0.25490196079999999" green="0.52549019610000003" blue="0.85490196080000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tR2-7d-u1E" customClass="radioButton" customModule="radioButton" customModuleProvider="target">
+                                <rect key="frame" x="7" y="46" width="81.5" height="20.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
-                                        <real key="value" value="4"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="btnafdf"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="innerMultiple">
+                                        <real key="value" value="0.5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D8H-Dz-JHu"/>
+                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aUu-O2-7LW"/>
                                 </connections>
-                            </button>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Buf-Ib-nTl" customClass="radioButton" customModule="radioButton" customModuleProvider="target">
+                                <rect key="frame" x="7" y="79" width="81.5" height="20.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="btnafdf"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="innerMultiple">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="0.99607843139999996" green="0.28627450980000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                        <color key="value" red="0.99607843139999996" green="0.28627450980000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vJn-R0-0Pe"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ddq-RL-1LW" customClass="radioButton" customModule="radioButton" customModuleProvider="target">
+                                <rect key="frame" x="108.5" y="46" width="124.5" height="20.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="1234567890"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="innerMultiple">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nl9-5S-nFP"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UIt-8c-DFC" customClass="radioButton" customModule="radioButton" customModuleProvider="target">
+                                <rect key="frame" x="108" y="79" width="175" height="29"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="1234567890"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="innerMultiple">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="textSize">
+                                        <real key="value" value="24"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="0.25490196079999999" green="0.52549019610000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                        <color key="value" red="0.25490196079999999" green="0.52549019610000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RB7-8p-moh"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="SFa-cK-X7c" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="0be-BW-voX"/>
-                            <constraint firstItem="YmO-aT-PQq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="4Ra-n4-5dh"/>
-                            <constraint firstItem="YmO-aT-PQq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="61I-mp-j2Z"/>
-                            <constraint firstItem="SFa-cK-X7c" firstAttribute="leading" secondItem="YmO-aT-PQq" secondAttribute="trailing" constant="68" id="dfk-Y7-5JR"/>
+                            <constraint firstItem="UIt-8c-DFC" firstAttribute="top" secondItem="Ddq-RL-1LW" secondAttribute="bottom" constant="12.5" id="5d9-da-RDF"/>
+                            <constraint firstItem="UIt-8c-DFC" firstAttribute="leading" secondItem="Buf-Ib-nTl" secondAttribute="trailing" constant="19.5" id="LYH-f0-llZ"/>
+                            <constraint firstItem="Ddq-RL-1LW" firstAttribute="leading" secondItem="tR2-7d-u1E" secondAttribute="trailing" constant="20" id="gzv-18-wem"/>
+                            <constraint firstItem="Ddq-RL-1LW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="26" id="hIc-fe-pxD"/>
+                            <constraint firstItem="Buf-Ib-nTl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="7" id="kPf-Vp-RT1"/>
+                            <constraint firstItem="tR2-7d-u1E" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="7" id="m7r-3T-nkL"/>
+                            <constraint firstItem="Buf-Ib-nTl" firstAttribute="top" secondItem="tR2-7d-u1E" secondAttribute="bottom" constant="12.5" id="pzd-TL-tm2"/>
+                            <constraint firstItem="tR2-7d-u1E" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="26" id="vc2-j5-fCS"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outletCollection property="btns" destination="YmO-aT-PQq" collectionClass="NSMutableArray" id="lXV-PZ-QHh"/>
-                        <outletCollection property="btns" destination="SFa-cK-X7c" collectionClass="NSMutableArray" id="htO-Xd-qhx"/>
+                        <outletCollection property="btns" destination="tR2-7d-u1E" collectionClass="NSMutableArray" id="m7w-fY-wfm"/>
+                        <outletCollection property="btns" destination="Ddq-RL-1LW" collectionClass="NSMutableArray" id="Ppi-bC-gUr"/>
+                        <outletCollection property="btns" destination="Buf-Ib-nTl" collectionClass="NSMutableArray" id="67Y-QC-aY8"/>
+                        <outletCollection property="btns" destination="UIt-8c-DFC" collectionClass="NSMutableArray" id="zDR-LE-FJy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="22" y="-26"/>
+            <point key="canvasLocation" x="21.600000000000001" y="-26.53673163418291"/>
         </scene>
     </scenes>
 </document>

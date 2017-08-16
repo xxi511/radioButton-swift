@@ -22,15 +22,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func test(_ sender: UIButton) {
+    @IBAction func test(_ sender: radioButton) {
         
         for btn in self.btns {
-            if btn == sender {
-                btn.isSelected = true
-            }
-            else {
-                btn.isSelected = false
-            }
+            btn.radioSelected = (btn == sender) ? true: false
         }
     }
 

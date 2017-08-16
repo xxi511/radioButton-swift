@@ -1,65 +1,115 @@
 //
 //  radioButton.swift
-//  radioButton
+//  radioTest
 //
-//  Created by 陳建佑 on 13/06/2017.
+//  Created by 陳建佑 on 15/08/2017.
 //  Copyright © 2017 陳建佑. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 @IBDesignable
-class radioButton: UIButton {
+class radioButton: UIControl {
     
-    @IBInspectable var lineColor: UIColor = UIColor.black {
+    // MARK: Parameter
+    let titleLabel = UILabel()
+    @IBInspectable var title: String = "hj" {
         didSet {
-            guard lineColor == lineColor else {return}
-            
-            if lineColor != oldValue {
-                self.drawCircle()
-            }
+            self.titleLabel.text = title
         }
     }
     
-    @IBInspectable var fillColor: UIColor = UIColor.blue {
+    @IBInspectable var color: UIColor = UIColor.black {
         didSet {
-            guard fillColor == fillColor else {return}
-            
-            if fillColor != oldValue {
-                self.drawCircle()
-            }
+            self.titleLabel.textColor = color
+            self.outterLayer.strokeColor = color.cgColor
         }
     }
     
+    @IBInspectable var fillColor: UIColor = UIColor.black {
+        didSet {
+            self.innerLayer.fillColor = fillColor.cgColor
+        }
+    }
+    
+    private var paddingConstraint = NSLayoutConstraint()
     @IBInspectable var padding: CGFloat = 5.0 {
         didSet {
-            guard padding == padding else {return}
-            if padding != oldValue {
-                self.drawCircle()
+            let fontHeight = self.titleLabel.font.lineHeight
+            let constant = fontHeight + padding
+            if constant >= 0 {
+                self.paddingConstraint.constant = constant
+                self.layoutIfNeeded()
             }
         }
     }
     
-    @IBInspectable var lineWidth: CGFloat = 1 {
+    private var mylineWidth: CGFloat = 1.0
+    @IBInspectable var lineWidth: CGFloat {
+        set {
+            self.mylineWidth = (newValue >= 1) ? newValue: 1
+            
+            self.outterLayer.lineWidth = self.mylineWidth
+            self.layoutIfNeeded()
+        }
+        get {
+            return self.mylineWidth
+        }
+    }
+    
+    private var myInnerMultiple: CGFloat = 1.0
+    @IBInspectable var innerMultiple: CGFloat {
+        set {
+            self.myInnerMultiple = (newValue >= 0) ? newValue: 0.1
+            
+            if self.radioSelected {
+                self.innerLayer.removeFromSuperlayer()
+                self.innerLayerInit()
+            }
+        }
+        get {
+            return self.myInnerMultiple
+        }
+    }
+    
+    private var myTextSize: CGFloat = 17.0
+    @IBInspectable var textSize: CGFloat {
+        set {
+            myTextSize = (newValue >= 1) ? newValue: 1
+            self.titleLabel.font = self.titleLabel.font.withSize(myTextSize)
+            
+            self.outterLayer.removeFromSuperlayer()
+            self.radioInit()
+            
+            let fontHeight = self.titleLabel.font.lineHeight
+            self.paddingConstraint.constant = fontHeight + self.padding
+        }
+        get {
+            return self.myTextSize
+        }
+    }
+    
+    @IBInspectable var radioSelected: Bool = false {
         didSet {
-            guard lineWidth == lineWidth else {return}
-            if lineWidth != oldValue {
-                self.drawCircle()
-            }
+            (radioSelected) ? self.innerLayerInit(): self.innerLayer.removeFromSuperlayer()
+            self.layoutIfNeeded()
         }
     }
     
-    private var circleLayer = CAShapeLayer()
-    private var centerLayer = CAShapeLayer()
+    private var outterLayer = CAShapeLayer()
+    private var innerLayer = CAShapeLayer()
     
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    // MARK: Initialization
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.viewInit()
         self.improvePerformance()
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.viewInit()
         self.improvePerformance()
     }
     
@@ -72,71 +122,66 @@ class radioButton: UIButton {
         isOpaque = true
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    private func viewInit() {
+        self.lineWidth = 1.0
+        self.titleLabelInit()
+        self.radioInit()
         
-        self.drawCircle()
+        print("f")
     }
     
-    func drawCircle() {
+    private func titleLabelInit() {
+        self.addSubview(self.titleLabel)
+        self.titleLabel.textAlignment = .center
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        let fontHeight = self.titleLabel.font.lineHeight
         
-        let textFrame = self.titleLabel?.frame
-        let frame = self.frame
+        // right
+        self.addConstraint(NSLayoutConstraint(item: self.titleLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0))
         
+        // left
+        self.paddingConstraint = NSLayoutConstraint(item: self.titleLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: fontHeight + self.padding)
+        self.addConstraint(self.paddingConstraint)
         
-        if textFrame!.origin.x + self.padding < textFrame!.size.height {
-            let diff = textFrame!.size.height + self.padding - textFrame!.origin.x
-            let newW = frame.size.width + diff
-            self.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: newW, height: frame.size.height)
-            return
-        }
+        // Top
+        self.addConstraint(NSLayoutConstraint(item: self.titleLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0))
         
-        let radius = (textFrame?.size.height)! * 0.6 / 2
-        let ctr_x = (textFrame?.origin.x)! - (radius + self.padding)
-        let ctr_y = frame.size.height / 2
-
-        if (self.layer.sublayers?.contains(self.circleLayer))! {
-            let idx = self.layer.sublayers?.index(of: self.circleLayer)
-            self.layer.sublayers?.remove(at: idx!)
-        }
-        
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: ctr_x ,y: ctr_y), radius: radius, startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
-        
-        self.circleLayer.path = circlePath.cgPath
-        
-        //change the fill color
-        self.circleLayer.fillColor = UIColor.clear.cgColor
-        //you can change the stroke color
-        self.circleLayer.strokeColor = self.lineColor.cgColor
-        //you can change the line width
-        self.circleLayer.lineWidth = self.lineWidth
-        
-        self.layer.addSublayer(self.circleLayer)
-        
-        self.drawCenter(ctr_x: ctr_x, ctr_y: ctr_y, radius: radius)
+        // Down
+        self.addConstraint(NSLayoutConstraint(item: self.titleLabel, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
+        self.titleLabel.setContentCompressionResistancePriority(1000, for: .horizontal)
+        self.titleLabel.setContentCompressionResistancePriority(1000, for: .vertical)
+        self.layoutIfNeeded()
     }
     
-    func drawCenter(ctr_x: CGFloat, ctr_y: CGFloat, radius: CGFloat) {
+    private func radioInit() {
+        let fontHeight = self.titleLabel.font.lineHeight
+        let frameHeight = self.frame.size.height
+        let ctr_y = (frameHeight == 0) ? fontHeight/2: frameHeight/2
         
-        if (self.layer.sublayers?.contains(self.centerLayer))! {
-            let idx = self.layer.sublayers?.index(of: self.centerLayer)
-            self.layer.sublayers?.remove(at: idx!)
-        }
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: fontHeight/2 ,y: ctr_y), radius: fontHeight*0.35, startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
         
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: ctr_x ,y: ctr_y), radius: radius * 0.5, startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+        self.outterLayer.path = circlePath.cgPath
+        self.outterLayer.rasterizationScale = UIScreen.main.scale
+        self.outterLayer.shouldRasterize = true
+        self.outterLayer.lineWidth = self.lineWidth
+        self.outterLayer.fillColor = nil
+        self.outterLayer.strokeColor = self.color.cgColor
+        self.layer.addSublayer(self.outterLayer)
+    }
+    
+    private func innerLayerInit() {
+        let fontHeight = self.titleLabel.font.lineHeight
+        let frameHeight = self.frame.size.height
+        let ctr_y = (frameHeight == 0) ? fontHeight/2: frameHeight/2
         
-        self.centerLayer.path = circlePath.cgPath
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: fontHeight/2 ,y: ctr_y), radius: fontHeight*0.35*self.innerMultiple, startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
         
-        //change the fill color
-        self.centerLayer.fillColor = self.fillColor.cgColor
-        //you can change the stroke color
-        self.centerLayer.strokeColor = self.fillColor.cgColor
-        //you can change the line width
-        self.centerLayer.lineWidth = 1
-        
-        self.layer.addSublayer(self.centerLayer)
-        
-        self.centerLayer.isHidden = (self.isSelected) ? false: true
-        
+        self.innerLayer.path = circlePath.cgPath
+        self.innerLayer.rasterizationScale = UIScreen.main.scale
+        self.innerLayer.shouldRasterize = true
+        self.innerLayer.lineWidth = self.lineWidth
+        self.innerLayer.fillColor = self.fillColor.cgColor
+        self.innerLayer.strokeColor = nil
+        self.layer.addSublayer(self.innerLayer)
     }
 }
